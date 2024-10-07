@@ -50,6 +50,10 @@ class TestOffers():
 
     def test_freebie_single(self, prices):
         assert checkout_solution.checkout("EEB") == prices.get("E") * 2
+        assert checkout_solution.checkout("FFF") == 20
+        assert checkout_solution.checkout("NNNM") == 120
+        assert checkout_solution.checkout("RRRQ") == 150
+        assert checkout_solution.checkout("UUUU") == 120
 
     def test_freebie_multiple(self, prices):
         assert checkout_solution.checkout("EEEEBB") == prices.get("E") * 4
@@ -70,3 +74,4 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
