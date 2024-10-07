@@ -28,11 +28,17 @@ class TestCheckout():
         checkout_price = sum(prices.values())
         assert checkout_solution.checkout(checkout_string) == checkout_price
 
+    def test_nonexistent_item(self):
+        assert checkout_solution.checkout("Z") == -1
+
+    def test_empty(self):
+        assert checkout_solution.checkout("") == 0
+
 
 class TestOffers():
-    def test_offers_basic(self):
-        assert checkout_solution.checkout("AAA") == 130
-        assert checkout_solution.checkout("BB") == 45
+    def test_offers_basic(self, offers):
+        assert checkout_solution.checkout("A" * offers.get("A")[0]) == offers.get("A")[1]
+        assert checkout_solution.checkout("B" * offers.get("B")[0]) == offers.get("B")[1]
 
     def test_offers_advanced(self):
         assert checkout_solution.checkout("BBBB") == 90
@@ -44,18 +50,12 @@ class TestOffers():
         assert checkout_solution.checkout("AAAAAAAAAAAA") == 500
         assert checkout_solution.checkout("AAAAAAAAAAAAAAA") == 600
 
-    def test_nonexistent_item(self):
-        assert checkout_solution.checkout("Z") == -1
+    def test_freebie_single(self, prices):
+        assert checkout_solution.checkout("EEB") == prices.get("E") * 2
 
-    def test_empty(self):
-        assert checkout_solution.checkout("") == 0
-
-    def test_freebie_single(self):
-        assert checkout_solution.checkout("EEB") == 80
-
-    def test_freebie_multiple(self):
-        assert checkout_solution.checkout("EEEEBB") == 160
-        assert checkout_solution.checkout("EEEEEBB") == 200
+    def test_freebie_multiple(self, prices):
+        assert checkout_solution.checkout("EEEEBB") == prices.get("E") * 4
+        assert checkout_solution.checkout("EEEEEBB") == prices.get("E") * 5
 
 
 class TestDecodeSKUs():
@@ -72,5 +72,6 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
 
 
