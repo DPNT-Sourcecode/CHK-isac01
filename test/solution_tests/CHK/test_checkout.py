@@ -21,7 +21,7 @@ def offers():
 
 class TestCheckout():
     def test_single_item(self, prices):
-        assert checkout_solution.checkout("E") == 40
+        assert checkout_solution.checkout("A") == prices["A"]
 
     def test_all_items(self, prices):
         checkout_string = "".join(prices.keys())
@@ -72,6 +72,7 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
 
 
 
