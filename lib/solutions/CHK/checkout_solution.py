@@ -13,7 +13,9 @@ offers = {
 }
 
 freebies = {
-
+    # Example: Buy 3 of A, get 2 B for free would be
+    # "A": (3, "B", 2)
+    "E": (2, "B", 1)
 }
 
 # noinspection PyUnusedLocal
@@ -29,6 +31,20 @@ def checkout(skus):
 
     return total
 
+def decode_string(skus):
+    """Decodes and validates string input, returning a dictionary mapping items to their quantities"""
+    decoded_items = defaultdict(int)
+    for char in skus:
+        if not (char.isalpha() and char.isupper()):
+            return -1
+
+        if prices.get(char) is None:
+            return -1
+
+        decoded_items[char] += 1
+
+    return decoded_items.items()
+
 def get_best_price(item, quantity):
     price = prices.get(item)
     if offers.get(item) is None:
@@ -43,16 +59,15 @@ def get_best_price(item, quantity):
 
     return price_matrix[-1]
 
-def decode_string(skus):
-    """Decodes and validates string input, returning a dictionary mapping items to their quantities"""
-    decoded_items = defaultdict(int)
-    for char in skus:
-        if not (char.isalpha() and char.isupper()):
-            return -1
+def apply_freebies(items):
+    for item, quantity in items.items():
+        if freebies.get(item) is None:
+            continue
 
-        if prices.get(char) is None:
-            return -1
+        times_applied = quantity // freebies.get(item)[0]
+        freebie = freebies.get(item)[1]
+        num_freebies = freebies.get(item)[2] * times_applied
 
-        decoded_items[char] += 1
+        # Max to ensure doesn't go below 0
+        items[freebie] = max(items[freebie] - num_freebies, 0)
 
-    return decoded_items.items()
