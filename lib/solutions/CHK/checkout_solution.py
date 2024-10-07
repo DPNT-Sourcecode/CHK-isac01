@@ -110,5 +110,10 @@ def apply_freebies(items):
         # Max to ensure doesn't go below 0
         items[freebie] = max(items[freebie] - num_freebies, 0)
 
+def apply_group_offers(items):
+    for group, (offer_quantity, offer_price) in group_offers.items():
+        num_items = sum(map(lambda x: items.get(x, 0), group))
+
+
 
 
