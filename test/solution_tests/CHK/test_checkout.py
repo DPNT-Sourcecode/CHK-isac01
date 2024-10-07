@@ -20,21 +20,29 @@ def offers():
 
 class TestCheckout():
     def test_single_item(self, prices):
-        assert checkout_solution.checkout("1A") == prices["A"]
+        assert checkout_solution.checkout("A") == prices["A"]
 
     def test_all_items(self, prices):
-        checkout_string = ",".join(map(lambda x: f"1{x}", prices.keys()))
+        checkout_string = "".join(prices.keys())
         checkout_price = sum(prices.values())
         assert checkout_solution.checkout(checkout_string) == checkout_price
 
     def test_offers(self, offers):
-        assert checkout_solution.checkout("3A") == 130
-        assert checkout_solution.checkout("2B") == 45
+        assert checkout_solution.checkout("AAA") == 130
+        assert checkout_solution.checkout("BB") == 45
 
 
 class TestDecodeSKUs():
     def test_single_item(self):
         assert checkout_solution.decode_string("A") == [("A", 1)]
 
+    def test_lowercase(self):
+        assert checkout_solution.decode_string("a") == [("A", 1)]
 
+    def test_multiple_items(self):
+        assert checkout_solution.decode_string("AAA") == [("A", 3)]
 
+    def test_invalid(self):
+        assert checkout_solution.decode_string("-") == -1
+        assert checkout_solution.decode_string("1") == -1
+        assert checkout_solution.decode_string("abc1") == -1
