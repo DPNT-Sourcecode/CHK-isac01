@@ -19,6 +19,3 @@ class TestCheckout():
         checkout_string = ",".join(map(lambda x: f"1{x}", prices.keys()))
         checkout_price = sum(prices.values())
         assert checkout_solution.checkout(checkout_string) == checkout_price
-
-
-
