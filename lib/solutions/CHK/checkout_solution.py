@@ -44,6 +44,3 @@ def decode_string(skus):
         decoded_items[char] += 1
 
     return list(decoded_items.items())
-
-
-
