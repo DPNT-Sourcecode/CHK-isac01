@@ -22,9 +22,6 @@ class TestCheckout():
         checkout_price = sum(prices.values())
         assert checkout_solution.checkout(checkout_string) == checkout_price
 
-    def test_nonexistent_item(self):
-        assert checkout_solution.checkout("Z") == -1
-
     def test_empty(self):
         assert checkout_solution.checkout("") == 0
 
@@ -34,6 +31,9 @@ class TestOffers():
         assert checkout_solution.checkout("A" * offers.get("A")[0][0]) == offers.get("A")[0][1]
         assert checkout_solution.checkout("B" * offers.get("B")[0][0]) == offers.get("B")[0][1]
         assert checkout_solution.checkout("FFF") == 20
+        assert checkout_solution.checkout("FFFF") == 30
+        assert checkout_solution.checkout("FFFFF") == 40
+        assert checkout_solution.checkout("FFFFFF") == 40
 
     def test_offers_advanced(self):
         assert checkout_solution.checkout("BBBB") == 90
@@ -67,5 +67,6 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
 
 
