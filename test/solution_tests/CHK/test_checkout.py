@@ -4,24 +4,18 @@ import pytest
 
 @pytest.fixture
 def prices():
-    return {
-        "A": 50,
-        "B": 30,
-        "C": 20,
-        "D": 15,
-        "E": 40,
-    }
+    return checkout_solution.prices
 
 @pytest.fixture
 def offers():
-    return {
-        "A": (3, 130),
-        "B": (2, 45),
-    }
+    return checkout_solution.offers
 
 class TestCheckout():
-    def test_single_item(self, prices):
+    def test_single_item_A(self, prices):
         assert checkout_solution.checkout("A") == prices["A"]
+
+    def test_single_item_F(self, prices):
+        assert checkout_solution.checkout("F") == prices["F"]
 
     def test_all_items(self, prices):
         checkout_string = "".join(prices.keys())
@@ -72,3 +66,4 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
