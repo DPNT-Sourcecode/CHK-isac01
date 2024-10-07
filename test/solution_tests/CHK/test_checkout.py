@@ -35,8 +35,11 @@ class TestCheckout():
         assert checkout_solution.checkout("BBBB") == 90
         assert checkout_solution.checkout("BBB") == 75
 
-    def test_invalid_item(self):
+    def test_nonexistent_item(self):
         assert checkout_solution.checkout("Z") == -1
+
+    def test_empty(self):
+        assert checkout_solution.checkout("") == 0
 
 
 class TestDecodeSKUs():
@@ -44,7 +47,7 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("A") == [("A", 1)]
 
     def test_lowercase(self):
-        assert checkout_solution.decode_string("a") == [("A", 1)]
+        assert checkout_solution.decode_string("a") == -1
 
     def test_multiple_items(self):
         assert checkout_solution.decode_string("AAA") == [("A", 3)]
@@ -53,5 +56,6 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
 
 
