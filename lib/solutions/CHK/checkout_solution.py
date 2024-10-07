@@ -31,9 +31,13 @@ def checkout(skus):
     return total
 
 def get_best_price(item, quantity):
+    price = prices.get(item)
+    if offers.get(item) is None:
+        return quantity * price
+
     price_matrix = [0] + [float("inf")] * quantity
     for i in range(1, quantity+1):
-        price_matrix[i] = min(price_matrix[i], price_matrix[i-1] + prices[item])
+        price_matrix[i] = min(price_matrix[i], price_matrix[i-1] + price)
         for offer_quantity, offer_price in offers.get(item, []):
             if i >= offer_quantity:
                 price_matrix[i] = min(price_matrix[i], price_matrix[i-offer_quantity] + offer_price)
@@ -53,5 +57,6 @@ def decode_string(skus):
         decoded_items[char] += 1
 
     return list(decoded_items.items())
+
 
 
