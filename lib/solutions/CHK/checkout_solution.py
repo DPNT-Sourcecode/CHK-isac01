@@ -12,6 +12,10 @@ offers = {
     "B": [(2, 45)],
 }
 
+freebies = {
+
+}
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
@@ -20,7 +24,7 @@ def checkout(skus):
         return -1
 
     total = 0
-    for item, quantity in items:
+    for item, quantity in items.items():
         total += get_best_price(item, quantity)
 
     return total
@@ -40,7 +44,7 @@ def get_best_price(item, quantity):
     return price_matrix[-1]
 
 def decode_string(skus):
-    """Decodes and validates string input, returning an array of 2-tuples containing the item and quantity"""
+    """Decodes and validates string input, returning a dictionary mapping items to their quantities"""
     decoded_items = defaultdict(int)
     for char in skus:
         if not (char.isalpha() and char.isupper()):
@@ -51,7 +55,8 @@ def decode_string(skus):
 
         decoded_items[char] += 1
 
-    return list(decoded_items.items())
+    return decoded_items.items()
+
 
 
 
