@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 prices = {
     "A": 50,
     "B": 30,
@@ -31,24 +33,18 @@ def checkout(skus):
 
 def decode_string(skus):
     """Decodes and validates string input, returning an array of 2-tuples containing the item and quantity"""
-    # Assuming string format for this round since not specified
     if skus == "":
         return -1
 
-    decoded_items = []
-    for sku in skus.split(","):
-        item = sku[-1].upper()
-        if prices.get(item) is None:
+    decoded_items = defaultdict(int)
+    for char in skus:
+        if not char.isalpha():
             return -1
 
-        try:
-            quantity = int(sku[:-1])
-        except ValueError:
-            return -1
+        decoded_items[char.upper()] += 1
 
-        decoded_items.append((item, quantity))
+    return decoded_items.items()
 
-    return decoded_items
 
 
 
