@@ -27,6 +27,8 @@ class TestCheckout():
         checkout_price = sum(prices.values())
         assert checkout_solution.checkout(checkout_string) == checkout_price
 
-    def test_offer(self, offers):
+    def test_offers(self, offers):
         assert checkout_solution.checkout("3A") == 130
+        assert checkout_solution.checkout("2B") == 45
+
 
