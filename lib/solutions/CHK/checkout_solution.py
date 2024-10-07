@@ -112,8 +112,9 @@ def apply_freebies(items):
 
 def apply_group_offers(items):
     for group, (offer_quantity, offer_price) in group_offers.items():
+        # Get how many items in checkout eligible for offer
         num_items = sum(map(lambda x: items.get(x, 0), group))
+        if num_items < offer_quantity:
+            continue
 
-
-
-
+        group_sorted = sorted(group, key=prices.get, reverse=True)
