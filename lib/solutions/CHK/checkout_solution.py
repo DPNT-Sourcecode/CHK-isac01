@@ -61,6 +61,7 @@ def checkout(skus):
 
     total = 0
     apply_freebies(items)
+    apply_group_offers(items)
     total += apply_group_offers(items)
     for item, quantity in items.items():
         total += get_best_price(item, quantity)
@@ -111,6 +112,7 @@ def apply_freebies(items):
         items[freebie] = max(items[freebie] - num_freebies, 0)
 
 def apply_group_offers(items):
+    total_price = 0
     for group, (offer_quantity, offer_price) in group_offers.items():
         # Get how many items in checkout eligible for offer
         num_items = sum(map(lambda x: items.get(x, 0), group))
@@ -122,7 +124,18 @@ def apply_group_offers(items):
         # Order eligible items by price, from lowest to highest
         group_sorted = sorted(group, key=prices.get)
 
+        # Remove discounted items from basket so they don't get counted again.
+        # Removes more expensive items first, and cheaper items last
         while num_discounted_items > 0:
             item = group_sorted.pop()
+            to_discount = min(num_discounted_items, items.get(item))
+            items[item] -= to_discount
+            num_discounted_items -= to_discount
+
+        total_price += (num_items // offer_quantity) * offer_price
+
+    return total_price
+
+
 
 
