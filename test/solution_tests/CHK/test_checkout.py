@@ -27,9 +27,13 @@ class TestCheckout():
         checkout_price = sum(prices.values())
         assert checkout_solution.checkout(checkout_string) == checkout_price
 
-    def test_offers(self, offers):
+    def test_offers_basic(self, offers):
         assert checkout_solution.checkout("AAA") == 130
         assert checkout_solution.checkout("BB") == 45
+
+    def test_offers_advances(self):
+        assert checkout_solution.checkout("BBBB") == 90
+        assert checkout_solution.checkout("BBB") == 75
 
 
 class TestDecodeSKUs():
@@ -46,3 +50,4 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
