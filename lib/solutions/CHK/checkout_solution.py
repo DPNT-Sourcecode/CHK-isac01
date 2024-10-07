@@ -12,6 +12,7 @@ prices = {
 offers = {
     "A": [(3, 130), (5, 200)],
     "B": [(2, 45)],
+    "F": [(3, 2 * prices["F"])],
 }
 
 freebies = {
@@ -76,4 +77,5 @@ def apply_freebies(items):
 
         # Max to ensure doesn't go below 0
         items[freebie] = max(items[freebie] - num_freebies, 0)
+
 
