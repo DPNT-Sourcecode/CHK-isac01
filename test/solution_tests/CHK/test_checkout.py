@@ -30,10 +30,13 @@ class TestOffers():
     def test_offers_basic(self, offers):
         assert checkout_solution.checkout("A" * offers.get("A")[0][0]) == offers.get("A")[0][1]
         assert checkout_solution.checkout("B" * offers.get("B")[0][0]) == offers.get("B")[0][1]
-        assert checkout_solution.checkout("FFF") == 20
-        assert checkout_solution.checkout("FFFF") == 30
-        assert checkout_solution.checkout("FFFFF") == 40
-        assert checkout_solution.checkout("FFFFFF") == 40
+        assert checkout_solution.checkout("H" * 5) == 45
+        assert checkout_solution.checkout("H" * 10) == 80
+        assert checkout_solution.checkout("K" * 2) == 150
+        assert checkout_solution.checkout("P" * 5) == 200
+        assert checkout_solution.checkout("Q" * 3) == 80
+        assert checkout_solution.checkout("V" * 2) == 90
+        assert checkout_solution.checkout("V" * 3) == 130
 
     def test_offers_advanced(self):
         assert checkout_solution.checkout("BBBB") == 90
@@ -67,8 +70,3 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
-
-
-
-
-
