@@ -61,6 +61,7 @@ def checkout(skus):
 
     total = 0
     apply_freebies(items)
+    total += apply_group_offers(items)
     for item, quantity in items.items():
         total += get_best_price(item, quantity)
 
@@ -108,5 +109,6 @@ def apply_freebies(items):
 
         # Max to ensure doesn't go below 0
         items[freebie] = max(items[freebie] - num_freebies, 0)
+
 
 
