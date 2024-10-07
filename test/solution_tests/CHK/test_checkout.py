@@ -35,6 +35,9 @@ class TestCheckout():
         assert checkout_solution.checkout("BBBB") == 90
         assert checkout_solution.checkout("BBB") == 75
 
+    def test_invalid_item(self):
+        assert checkout_solution.checkout("Z") == -1
+
 
 class TestDecodeSKUs():
     def test_single_item(self):
@@ -50,4 +53,5 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
 

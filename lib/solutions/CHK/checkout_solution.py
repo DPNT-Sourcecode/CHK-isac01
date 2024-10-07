@@ -38,10 +38,15 @@ def decode_string(skus):
 
     decoded_items = defaultdict(int)
     for char in skus:
+        char = char.upper()
         if not char.isalpha():
             return -1
 
-        decoded_items[char.upper()] += 1
+        if prices.get(char) is None:
+            return -1
+
+        decoded_items[char] += 1
 
     return list(decoded_items.items())
+
 
