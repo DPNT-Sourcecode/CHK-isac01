@@ -13,11 +13,16 @@ offers = {
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
+    # Assuming string format for this round since not specified
     for sku in skus.split(","):
         item = sku[-1].upper()
+        if prices.get(item) is None:
+            return -1
+
         try:
-            price = int(sku[:-1])
+            quantity = int(sku[:-1])
         except ValueError:
             return -1
+
 
 
