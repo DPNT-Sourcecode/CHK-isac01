@@ -33,13 +33,9 @@ def checkout(skus):
 
 def decode_string(skus):
     """Decodes and validates string input, returning an array of 2-tuples containing the item and quantity"""
-    if skus == "":
-        return -1
-
     decoded_items = defaultdict(int)
     for char in skus:
-        char = char.upper()
-        if not char.isalpha():
+        if not (char.isalpha() and char.isupper()):
             return -1
 
         if prices.get(char) is None:
@@ -48,5 +44,6 @@ def decode_string(skus):
         decoded_items[char] += 1
 
     return list(decoded_items.items())
+
 
 
