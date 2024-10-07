@@ -117,4 +117,12 @@ def apply_group_offers(items):
         if num_items < offer_quantity:
             continue
 
-        group_sorted = sorted(group, key=prices.get, reverse=True)
+        num_discounted_items = num_items - (num_items % offer_quantity)
+
+        # Order eligible items by price, from lowest to highest
+        group_sorted = sorted(group, key=prices.get)
+
+        while num_discounted_items > 0:
+            item = group_sorted.pop()
+
+
