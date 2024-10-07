@@ -11,6 +11,13 @@ def prices():
         "D": 15,
     }
 
+@pytest.fixture
+def offers():
+    return {
+        "A": (3, 130),
+        "B": (2, 45),
+    }
+
 class TestCheckout():
     def test_single_item(self, prices):
         assert checkout_solution.checkout("1A") == prices["A"]
@@ -19,3 +26,7 @@ class TestCheckout():
         checkout_string = ",".join(map(lambda x: f"1{x}", prices.keys()))
         checkout_price = sum(prices.values())
         assert checkout_solution.checkout(checkout_string) == checkout_price
+
+    def test_offer(self, offers):
+        assert checkout_solution.checkout("3A") == 130
+
