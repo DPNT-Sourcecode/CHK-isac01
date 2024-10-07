@@ -66,12 +66,16 @@ def apply_freebies(items):
         if freebies.get(item) is None:
             continue
 
-        times_applied = quantity // freebies.get(item)[0]
         freebie = freebies.get(item)[1]
+        if items.get(freebie) == 0:
+            continue
+
+        times_applied = quantity // freebies.get(item)[0]
         num_freebies = freebies.get(item)[2] * times_applied
 
         # Max to ensure doesn't go below 0
         items[freebie] = max(items[freebie] - num_freebies, 0)
+
 
 
 
