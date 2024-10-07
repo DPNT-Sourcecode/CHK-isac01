@@ -50,15 +50,16 @@ class TestCheckout():
 
 class TestDecodeSKUs():
     def test_single_item(self):
-        assert checkout_solution.decode_string("A") == [("A", 1)]
+        assert checkout_solution.decode_string("A") == {"A": 1}
 
     def test_lowercase(self):
         assert checkout_solution.decode_string("a") == -1
 
     def test_multiple_items(self):
-        assert checkout_solution.decode_string("AAA") == [("A", 3)]
+        assert checkout_solution.decode_string("AAA") == {"A": 3}
 
     def test_invalid(self):
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+

@@ -26,6 +26,7 @@ def checkout(skus):
         return -1
 
     total = 0
+    apply_freebies(items)
     for item, quantity in items.items():
         total += get_best_price(item, quantity)
 
@@ -43,7 +44,7 @@ def decode_string(skus):
 
         decoded_items[char] += 1
 
-    return decoded_items.items()
+    return decoded_items
 
 def get_best_price(item, quantity):
     price = prices.get(item)
@@ -70,4 +71,5 @@ def apply_freebies(items):
 
         # Max to ensure doesn't go below 0
         items[freebie] = max(items[freebie] - num_freebies, 0)
+
 
