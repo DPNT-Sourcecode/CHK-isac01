@@ -30,6 +30,15 @@ def checkout(skus):
 
     return total
 
+def get_best_price(item, quantity):
+    price_matrix = [0] + [float("inf")] * quantity
+    for i in range(1, quantity+1):
+        price_matrix[i] = min(price_matrix[i], price_matrix[i-1] + prices[item])
+        for offer_quantity, offer_price in offers.get(item, []):
+            if i >= offer_quantity:
+                price_matrix[i] = min(price_matrix[i], price_matrix[i-offer_quantity] + offer_price)
+
+    return price_matrix[-1]
 
 def decode_string(skus):
     """Decodes and validates string input, returning an array of 2-tuples containing the item and quantity"""
@@ -44,4 +53,5 @@ def decode_string(skus):
         decoded_items[char] += 1
 
     return list(decoded_items.items())
+
 
