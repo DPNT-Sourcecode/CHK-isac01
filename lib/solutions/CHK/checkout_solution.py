@@ -61,7 +61,6 @@ def checkout(skus):
 
     total = 0
     apply_freebies(items)
-    apply_group_offers(items)
     total += apply_group_offers(items)
     for item, quantity in items.items():
         total += get_best_price(item, quantity)
@@ -128,13 +127,14 @@ def apply_group_offers(items):
         # Removes more expensive items first, and cheaper items last
         while num_discounted_items > 0:
             item = group_sorted.pop()
-            to_discount = min(num_discounted_items, items.get(item))
+            to_discount = min(num_discounted_items, items.get(item, 0))
             items[item] -= to_discount
             num_discounted_items -= to_discount
 
         total_price += (num_items // offer_quantity) * offer_price
 
     return total_price
+
 
 
 

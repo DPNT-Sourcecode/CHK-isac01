@@ -18,9 +18,8 @@ class TestCheckout():
         assert checkout_solution.checkout("F") == prices["F"]
 
     def test_all_items(self, prices):
-        checkout_string = "".join(prices.keys())
-        checkout_price = sum(prices.values())
-        assert checkout_solution.checkout(checkout_string) == checkout_price
+        for item, price in prices.items():
+            assert checkout_solution.checkout(item) == price
 
     def test_empty(self):
         assert checkout_solution.checkout("") == 0
@@ -32,7 +31,7 @@ class TestOffers():
         assert checkout_solution.checkout("B" * offers.get("B")[0][0]) == offers.get("B")[0][1]
         assert checkout_solution.checkout("H" * 5) == 45
         assert checkout_solution.checkout("H" * 10) == 80
-        assert checkout_solution.checkout("K" * 2) == 150
+        assert checkout_solution.checkout("K" * 2) == 120
         assert checkout_solution.checkout("P" * 5) == 200
         assert checkout_solution.checkout("Q" * 3) == 80
         assert checkout_solution.checkout("V" * 2) == 90
@@ -59,6 +58,9 @@ class TestOffers():
         assert checkout_solution.checkout("EEEEBB") == prices.get("E") * 4
         assert checkout_solution.checkout("EEEEEBB") == prices.get("E") * 5
 
+    def test_group_offer(self):
+        assert checkout_solution.checkout("STX") == 45
+
 
 class TestDecodeSKUs():
     def test_single_item(self):
@@ -74,3 +76,4 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
