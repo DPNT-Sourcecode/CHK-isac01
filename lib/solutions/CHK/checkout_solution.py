@@ -32,13 +32,15 @@ prices = {
 offers = {
     "A": [(3, 130), (5, 200)],
     "B": [(2, 45)],
-    "F": [(3, 2 * prices["F"])],
+    # "F": [(3, 2 * prices["F"])],
+    "F": [(4, 2 * prices["F"]), (3, 2 * prices["F"])],
 }
 
 freebies = {
     # Example: Buy 3 of A, get 2 B for free would be
     # "A": (3, "B", 2)
-    "E": (2, "B", 1)
+    "E": (2, "B", 1),
+    # "F": (3, "F", 1)
 }
 
 # noinspection PyUnusedLocal
@@ -97,6 +99,7 @@ def apply_freebies(items):
 
         # Max to ensure doesn't go below 0
         items[freebie] = max(items[freebie] - num_freebies, 0)
+
 
 
 
