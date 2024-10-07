@@ -32,3 +32,9 @@ class TestCheckout():
         assert checkout_solution.checkout("2B") == 45
 
 
+class TestDecodeSKUs():
+    def test_single_item(self):
+        assert checkout_solution.decode_string("A") == [("A", 1)]
+
+
+
