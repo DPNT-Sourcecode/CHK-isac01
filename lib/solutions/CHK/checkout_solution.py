@@ -8,8 +8,8 @@ prices = {
 }
 
 offers = {
-    "A": (3, 130),
-    "B": (2, 45),
+    "A": [(3, 130), (5, 200)],
+    "B": [(2, 45)],
 }
 
 # noinspection PyUnusedLocal
@@ -44,3 +44,4 @@ def decode_string(skus):
         decoded_items[char] += 1
 
     return list(decoded_items.items())
+
