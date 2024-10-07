@@ -13,5 +13,11 @@ offers = {
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    raise NotImplementedError()
+    for sku in skus.split(","):
+        item = sku[-1].upper()
+        try:
+            price = int(sku[:-1])
+        except ValueError:
+            return -1
+
 
