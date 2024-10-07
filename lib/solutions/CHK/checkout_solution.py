@@ -21,12 +21,7 @@ def checkout(skus):
 
     total = 0
     for item, quantity in items:
-        price = prices.get(item)
-        if offers.get(item):
-            offer_quantity, offer_price = offers.get(item)
-            total += offer_price * (quantity // offer_quantity) + price * (quantity % offer_quantity)
-        else:
-            total += quantity * prices.get(item)
+        total += get_best_price(item, quantity)
 
     return total
 
@@ -57,6 +52,7 @@ def decode_string(skus):
         decoded_items[char] += 1
 
     return list(decoded_items.items())
+
 
 
 

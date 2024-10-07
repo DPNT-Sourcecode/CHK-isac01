@@ -31,9 +31,14 @@ class TestCheckout():
         assert checkout_solution.checkout("AAA") == 130
         assert checkout_solution.checkout("BB") == 45
 
-    def test_offers_advances(self):
+    def test_offers_advanced(self):
         assert checkout_solution.checkout("BBBB") == 90
         assert checkout_solution.checkout("BBB") == 75
+
+    def test_multi_offers(self):
+        assert checkout_solution.checkout("AAAAAAAA") == 330
+        assert checkout_solution.checkout("AAAAAAAAAA") == 400
+        assert checkout_solution.checkout("AAAAAAAAAAAA") == 500
 
     def test_nonexistent_item(self):
         assert checkout_solution.checkout("Z") == -1
@@ -56,3 +61,4 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
