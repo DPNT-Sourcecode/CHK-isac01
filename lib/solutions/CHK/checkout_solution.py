@@ -32,6 +32,9 @@ def checkout(skus):
 def decode_string(skus):
     """Decodes and validates string input, returning an array of 2-tuples containing the item and quantity"""
     # Assuming string format for this round since not specified
+    if skus == "":
+        return -1
+
     decoded_items = []
     for sku in skus.split(","):
         item = sku[-1].upper()
@@ -46,6 +49,7 @@ def decode_string(skus):
         decoded_items.append((item, quantity))
 
     return decoded_items
+
 
 
 
