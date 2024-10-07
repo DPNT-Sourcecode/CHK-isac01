@@ -13,9 +13,19 @@ offers = {
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    pass
+    items = decode_string(skus)
+    if items == -1:
+        return -1
+
+    total = 0
+    for item, quantity in items:
+        total += quantity * prices.get(item)
+
+    return total
+
 
 def decode_string(skus):
+    """Decodes and validates string input, returning an array of 2-tuples containing the item and quantity"""
     # Assuming string format for this round since not specified
     decoded_items = []
     for sku in skus.split(","):
@@ -29,3 +39,6 @@ def decode_string(skus):
             return -1
 
         decoded_items.append((item, quantity))
+
+    return decoded_items
+
