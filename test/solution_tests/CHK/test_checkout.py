@@ -60,6 +60,9 @@ class TestOffers():
 
     def test_group_offer(self):
         assert checkout_solution.checkout("STX") == 45
+        assert checkout_solution.checkout("ZYX") == 45
+        assert checkout_solution.checkout("STXYZS") == 90
+        assert checkout_solution.checkout("STXYZ") == 82
 
 
 class TestDecodeSKUs():
@@ -76,4 +79,5 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
 
