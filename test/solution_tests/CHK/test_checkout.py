@@ -64,6 +64,9 @@ class TestOffers():
         assert checkout_solution.checkout("STXYZS") == 90
         assert checkout_solution.checkout("STXYZ") == 82
 
+    def test_all_offers(self):
+        assert checkout_solution.checkout("STXAAABBNNNM") == 45 + 130 + 45 + 120
+
 
 class TestDecodeSKUs():
     def test_single_item(self):
@@ -79,5 +82,6 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
 
 
