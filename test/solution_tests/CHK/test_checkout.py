@@ -9,6 +9,7 @@ def prices():
         "B": 30,
         "C": 20,
         "D": 15,
+        "E": 40,
     }
 
 @pytest.fixture
@@ -27,7 +28,9 @@ class TestCheckout():
         checkout_price = sum(prices.values())
         assert checkout_solution.checkout(checkout_string) == checkout_price
 
-    def test_offers_basic(self, offers):
+
+class TestOffers():
+    def test_offers_basic(self):
         assert checkout_solution.checkout("AAA") == 130
         assert checkout_solution.checkout("BB") == 45
 
@@ -47,6 +50,13 @@ class TestCheckout():
     def test_empty(self):
         assert checkout_solution.checkout("") == 0
 
+    def test_freebie_single(self):
+        assert checkout_solution.checkout("EEB") == 80
+
+    def test_freebie_multiple(self):
+        assert checkout_solution.checkout("EEEEBB") == 160
+        assert checkout_solution.checkout("EEEEEBB") == 200
+
 
 class TestDecodeSKUs():
     def test_single_item(self):
@@ -62,4 +72,5 @@ class TestDecodeSKUs():
         assert checkout_solution.decode_string("-") == -1
         assert checkout_solution.decode_string("1") == -1
         assert checkout_solution.decode_string("abc1") == -1
+
 
